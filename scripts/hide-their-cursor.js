@@ -1,12 +1,8 @@
 Hooks.on('setup', () => {
-    for (let user of game.users) {
-        if (user === game.user) {
-            // Skip the current user
-            continue;
-        }
+    for (let user of game.users.filter(u => u !== game.user)) {
         let settingDef = {
-            name: `Hide cursor of ${user.name}`,
-            hint: `This client setting will hide you seeing ${user.name}'s mouse cursor.`,
+            name: game.i18n.format('hide-their-cursor.hideName', { name: user.name }),
+            hint: game.i18n.format('hide-their-cursor.hideNameHint', { name: user.name }),
             scope: 'client',
             config: true,
             type: Boolean,
@@ -15,10 +11,8 @@ Hooks.on('setup', () => {
         }
         game.settings.register('hide-their-cursor', user.name, settingDef)
 
-        let hide = game.settings.get("hide-their-cursor", user.name);
-        if (hide) {
+        if (game.settings.get("hide-their-cursor", user.name)) {
             user.permissions["SHOW_CURSOR"] = false;
         }
     }
 })
-

@@ -1,0 +1,6 @@
+{
+    "hide-their-cursor": {
+        "hideName": "Hide cursor of {name}",
+        "hideNameHint": "This client setting will prevent seeing {name}'s mouse cursor."
+    }
+}
